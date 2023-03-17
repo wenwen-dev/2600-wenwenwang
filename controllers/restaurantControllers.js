@@ -1,20 +1,20 @@
-const Restaurant = require('./../models/Restaurant');
+// const Restaurant = require('./../models/Restaurant');
 
 
-const getRestaurants = (req, res) => {
+// const getRestaurants = (req, res) => {
 
-}
+// }
 
-const getRestaurant = (req, res) => {
+// const getRestaurant = (req, res) => {
   
-}
+// }
 
-const postRestaurant = (req, res) => {
+// const postRestaurant = (req, res) => {
   
-}
+// }
 
-module.exports = {
-  getRestaurants,
-  getRestaurant,
-  postRestaurant,
-}
+// module.exports = {
+//   getRestaurants,
+//   getRestaurant,
+//   postRestaurant,
+// }
