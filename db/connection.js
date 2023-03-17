@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
-let mongoDB = `mongodb+srv://wenwen:Langara2023@cluster0.i89ae4x.mongodb.net/CPSC2600-project?retryWrites=true&w=majority`;
+require('dotenv').config();
+
+let mongoDB = process.env.DB_CONNECTION;
 
 module.exports = mongoose.connect(mongoDB);
