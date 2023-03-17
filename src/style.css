@@ -8,8 +8,8 @@ html {
 
 body {
   height: 100vh;
-  background-color: #FFFFE8;
-  color: #40513B;
+  background-color: #3D5656;
+  color: #CFFDE1;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -20,3 +20,28 @@ body {
 h1 {
   text-align: center;
 }
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  list-style-type: none;
+  font-size: 1.3rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: #CFFDE1;
+}
+
+a:hover {
+  color: #FED049;
+}
+
+#food-section {
+  /* display: none; */
+}
+

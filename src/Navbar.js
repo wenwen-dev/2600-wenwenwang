@@ -1,10 +1,16 @@
 import React from 'react';
+const { useState, useEffect } = React;
+
 
 const Navbar = props => {
   return (
-    <>
-      <h2>Nav Bar</h2>
-    </>
+    <nav>
+      <ul>
+        <li><a href='#' >Food</a></li>
+        <li><a href='#'>Restaurant</a></li>
+        <li><a href='#'>Cuisine</a></li>
+      </ul>
+    </nav>
   )
 }
 
