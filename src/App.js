@@ -16,7 +16,7 @@ const App = props => {
   }
 
   if (currentSelection === 'Food') {
-    displayedComponent = <FoodSection />
+    displayedComponent = <FoodSection currentSelection={currentSelection}/>
   }
   else if (currentSelection === 'Restaurant') {
     displayedComponent = <RestaurantSection />

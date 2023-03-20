@@ -11,8 +11,11 @@ const { Food } = require('./../models/Food');
 
 const postFood = (req, res) => {
   // Food.findOne({name: })
+  console.log(req.body);
+  const { cuisine, name } = req.body;
   let newFood = new Food({
-    name: 'cheese tart'
+    cuisine,
+    name
   });
 
   newFood.save()
