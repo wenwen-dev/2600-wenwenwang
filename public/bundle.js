@@ -8142,15 +8142,65 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FoodSection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FoodSection */ "./src/FoodSection.js");
 /* harmony import */ var _CuisineSection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CuisineSection */ "./src/CuisineSection.js");
 /* harmony import */ var _RestaurantSection__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RestaurantSection */ "./src/RestaurantSection.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
 var App = function App(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Best Food in Vancouver"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_FoodSection__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RestaurantSection__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CuisineSection__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    currentSelection = _useState2[0],
+    setCurrentSelection = _useState2[1];
+  var displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null);
+  var selectComponent = function selectComponent(event) {
+    event.preventDefault();
+    setCurrentSelection(event.target.innerHTML);
+  };
+  if (currentSelection === 'Food') {
+    displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_FoodSection__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+  } else if (currentSelection === 'Restaurant') {
+    displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RestaurantSection__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+  } else if (currentSelection === 'Cuisine') {
+    displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CuisineSection__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+  } else {
+    displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "hahaha"));
+  }
+  // useEffect(function display() {
+  //   if (currentSelection === 'Food') {
+  //     console.log(`Food should be rendered`);
+  //     displayedComponent = <FoodSection />
+  //   }
+  //   else {
+  //     console.log(`Hahaha should be rendered`);
+
+  //     displayedComponent = <><h2>hahaha</h2></>
+  //   }
+  //Qs: Why is UseEffect not needed here? What if after the user clicks on a section, e.f. 'Food', it's not updated in State yet, and therefore not rendered?
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Best Food in Vancouver"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    selectComponent: selectComponent
+  }), displayedComponent);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+// switch(selection) {
+//   case 'Food':
+//     setCurrentSelection('Food');
+//     break;
+//   case 'Restaurant':
+//     setCurrentSelection('Restaurant');
+//     break;
+//   case 'Cuisine':
+//     setCurrentSelection('Cuisine');
+//     break;
+// }
 
 /***/ }),
 
@@ -8216,11 +8266,23 @@ __webpack_require__.r(__webpack_exports__);
 var useState = (react__WEBPACK_IMPORTED_MODULE_0___default().useState),
   useEffect = (react__WEBPACK_IMPORTED_MODULE_0___default().useEffect);
 var Navbar = function Navbar(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+    onClick: function onClick(event) {
+      return props.selectComponent(event);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#"
-  }, "Food")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+  }, "Food")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+    onClick: function onClick(event) {
+      return props.selectComponent(event);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#"
-  }, "Restaurant")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+  }, "Restaurant")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+    onClick: function onClick(event) {
+      return props.selectComponent(event);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "#"
   }, "Cuisine"))));
 };
@@ -8269,7 +8331,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #3D5656;\n  color: #CFFDE1;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nh1 {\n  text-align: center;\n}\n\nnav ul {\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #CFFDE1;\n}\n\na:hover {\n  color: #FED049;\n}\n\n#food-section {\n  /* display: none; */\n}\n\n", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,sBAAsB;AACxB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,yBAAyB;EACzB,cAAc;EACd,0JAA0J;AAC5J;;AAEA;;AAEA;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,SAAS;EACT,qBAAqB;EACrB,iBAAiB;AACnB;;AAEA;EACE,qBAAqB;AACvB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,mBAAmB;AACrB","sourcesContent":["html {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #3D5656;\n  color: #CFFDE1;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nh1 {\n  text-align: center;\n}\n\nnav ul {\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #CFFDE1;\n}\n\na:hover {\n  color: #FED049;\n}\n\n#food-section {\n  /* display: none; */\n}\n\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "html {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #3D5656;\n  color: #CFFDE1;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nh1 {\n  text-align: center;\n}\n\nnav ul {\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #CFFDE1;\n}\n\na:hover {\n  color: #FED049;\n}\n\nli:hover{\n  color: gold\n}\n\n#food-section {\n  /* display: none; */\n}\n\n", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,sBAAsB;AACxB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,yBAAyB;EACzB,cAAc;EACd,0JAA0J;AAC5J;;AAEA;;AAEA;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,SAAS;EACT,qBAAqB;EACrB,iBAAiB;AACnB;;AAEA;EACE,qBAAqB;AACvB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE;AACF;;AAEA;EACE,mBAAmB;AACrB","sourcesContent":["html {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #3D5656;\n  color: #CFFDE1;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nh1 {\n  text-align: center;\n}\n\nnav ul {\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #CFFDE1;\n}\n\na:hover {\n  color: #FED049;\n}\n\nli:hover{\n  color: gold\n}\n\n#food-section {\n  /* display: none; */\n}\n\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
