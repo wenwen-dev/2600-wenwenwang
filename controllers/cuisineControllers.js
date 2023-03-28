@@ -16,7 +16,8 @@ const getCuisine = (req, res) => {
 const postCuisine = (req, res) => {
   
   let newCuisine = new Cuisine({
-    name: 'Mediterranean',
+    name: req.body.name,
+    foods: []
     // foods: [{
     //   name: 'yu xiang'
     // }] - //TODO: does not work, why? I do NOT need to create Food from Cuisine, but would be good to find out why it does not work.
