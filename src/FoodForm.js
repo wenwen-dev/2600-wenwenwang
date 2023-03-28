@@ -18,7 +18,6 @@ const FoodForm = props => {
   }
   const submitFood = event => {
     event.preventDefault();
-    console.log('submitting');
     axios.post('/api/v1/foods', {
       'cuisine': chosenCuisine,
       'name': newFoodName

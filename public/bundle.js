@@ -8162,15 +8162,24 @@ var App = function App(props) {
   var selectComponent = function selectComponent(event) {
     event.preventDefault();
     setCurrentSelection(event.target.innerHTML);
+    console.log(event.target.innerHTML);
+    console.log(currentSelection);
+    setInterval(function () {
+      return console.log("3 seconds: ".concat(currentSelection));
+    }, 3000);
   };
   if (currentSelection === 'Food') {
     displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_FoodSection__WEBPACK_IMPORTED_MODULE_2__["default"], {
       currentSelection: currentSelection
     });
   } else if (currentSelection === 'Restaurant') {
-    displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RestaurantSection__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+    displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RestaurantSection__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      currentSelection: currentSelection
+    });
   } else if (currentSelection === 'Cuisine') {
-    displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CuisineSection__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+    displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CuisineSection__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      currentSelection: currentSelection
+    });
   } else {
     displayedComponent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "hahaha"));
   }
@@ -8272,7 +8281,6 @@ var FoodForm = function FoodForm(props) {
   };
   var submitFood = function submitFood(event) {
     event.preventDefault();
-    console.log('submitting');
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/v1/foods', {
       'cuisine': chosenCuisine,
       'name': newFoodName
@@ -8402,7 +8410,9 @@ var Page = function Page(props) {
   if (props.currentSelection === 'Food') {
     displayedForm = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_FoodForm__WEBPACK_IMPORTED_MODULE_2__["default"], null);
   }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RandomSelection__WEBPACK_IMPORTED_MODULE_1__["default"], null), displayedForm);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RandomSelection__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    currentSelection: props.currentSelection
+  }), displayedForm, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, props.currentSelection));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Page);
 
@@ -8420,13 +8430,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var useState = (react__WEBPACK_IMPORTED_MODULE_0___default().useState),
   useEffect = (react__WEBPACK_IMPORTED_MODULE_0___default().useEffect);
+
 var RandomSelection = function RandomSelection(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Random selection"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, " hellooo"));
+  var _useState = useState([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    randomItems = _useState2[0],
+    setRandomItems = _useState2[1];
+  var target = '';
+  console.log(props.currentSelection);
+  if (props.currentSelection === 'Food') {
+    console.log('food selected');
+    target = 'foods';
+  } else if (props.currentSelection === 'Cuisine') {
+    console.log('cuisine selected');
+    target = 'cuisines';
+  } else {
+    console.log('uh oh');
+  }
+  axios__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/v1/".concat(target)).then(function (results) {
+    return setRandomItems(results.data);
+  })["catch"](function (error) {
+    return console.log(error);
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Random selection"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
+    className: "random-display"
+  }, randomItems.map(function (item) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+      key: item._id
+    }, item.cuisine);
+  })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RandomSelection);
+// useEffect(function displayRandom() {
+//   let target = '';
+//   console.log(props.currentSelection);
+//   if (props.currentSelection === 'Food') {
+//     console.log('food selected');
+//     target = 'foods';
+//   }
+//   else if (props.currentSelection === 'Cuisine') {
+//     console.log('cuisine selected');
+//     target = 'cuisines';
+//  }
+//  else {
+//   console.log('uh oh');
+//  }
+
+//   axios.get(`/api/v1/${target}`)
+//   .then(results=>setRandomItems(results.data))
+//   .catch(error=>console.log(error))
+
+// }, props.currentSelection);
 
 /***/ }),
 
@@ -8473,7 +8537,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #3D5656;\n  color: #CFFDE1;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nh1 {\n  text-align: center;\n}\n\nnav ul {\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #CFFDE1;\n}\n\na:hover {\n  color: #FED049;\n}\n\nli:hover{\n  color: gold\n}\n\nh2 {\n  text-align: center;\n}\n", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,sBAAsB;AACxB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,yBAAyB;EACzB,cAAc;EACd,0JAA0J;AAC5J;;AAEA;;AAEA;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,SAAS;EACT,qBAAqB;EACrB,iBAAiB;AACnB;;AAEA;EACE,qBAAqB;AACvB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE;AACF;;AAEA;EACE,kBAAkB;AACpB","sourcesContent":["html {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #3D5656;\n  color: #CFFDE1;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nh1 {\n  text-align: center;\n}\n\nnav ul {\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #CFFDE1;\n}\n\na:hover {\n  color: #FED049;\n}\n\nli:hover{\n  color: gold\n}\n\nh2 {\n  text-align: center;\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "html {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #3D5656;\n  color: #CFFDE1;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nh1 {\n  text-align: center;\n}\n\nnav ul {\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #CFFDE1;\n}\n\na:hover {\n  color: #ffc0cb;\n\n}\n\nli:hover{\n  color: #ffc0cb;\n\n}\n\nh2 {\n  text-align: center;\n  color: #ffc0cb;\n}\n\n.random-display {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n}", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;EACE,sBAAsB;AACxB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,yBAAyB;EACzB,cAAc;EACd,0JAA0J;AAC5J;;AAEA;;AAEA;;AAEA;EACE,kBAAkB;AACpB;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,SAAS;EACT,qBAAqB;EACrB,iBAAiB;AACnB;;AAEA;EACE,qBAAqB;AACvB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,cAAc;;AAEhB;;AAEA;EACE,cAAc;;AAEhB;;AAEA;EACE,kBAAkB;EAClB,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,kCAAkC;AACpC","sourcesContent":["html {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #3D5656;\n  color: #CFFDE1;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nh1 {\n  text-align: center;\n}\n\nnav ul {\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #CFFDE1;\n}\n\na:hover {\n  color: #ffc0cb;\n\n}\n\nli:hover{\n  color: #ffc0cb;\n\n}\n\nh2 {\n  text-align: center;\n  color: #ffc0cb;\n}\n\n.random-display {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

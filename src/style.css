@@ -38,13 +38,21 @@ a:link, a:visited {
 }
 
 a:hover {
-  color: #FED049;
+  color: #ffc0cb;
+
 }
 
 li:hover{
-  color: gold
+  color: #ffc0cb;
+
 }
 
 h2 {
   text-align: center;
+  color: #ffc0cb;
+}
+
+.random-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }

@@ -13,16 +13,19 @@ const App = props => {
   const selectComponent = event => {
     event.preventDefault();
     setCurrentSelection(event.target.innerHTML);
+    console.log(event.target.innerHTML);
+    console.log(currentSelection);
+    setInterval(()=>console.log(`3 seconds: ${currentSelection}`), 3000);
   }
 
   if (currentSelection === 'Food') {
     displayedComponent = <FoodSection currentSelection={currentSelection}/>
   }
   else if (currentSelection === 'Restaurant') {
-    displayedComponent = <RestaurantSection />
+    displayedComponent = <RestaurantSection currentSelection={currentSelection}/>
   }
   else if (currentSelection === 'Cuisine') {
-    displayedComponent = <CuisineSection />
+    displayedComponent = <CuisineSection currentSelection={currentSelection}/>
   }
   else {
     displayedComponent = <><h2>hahaha</h2></>

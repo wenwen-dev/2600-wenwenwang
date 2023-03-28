@@ -1,9 +1,13 @@
 const { Food } = require('./../models/Food');
 //TODO: used const Food, instead of { Food } -> Food is not a constructor error (coz 2 objects exported and I refer to both if not using {}!)
 
-// const getFoods = (req, res) => {
+const getFoods = (req, res) => {
+  Food.find({})
+  .exec()
+  .then(results=>res.send(results))
+  .catch(error=>console.log(error))
 
-// }
+}
 
 // const getFood = (req, res) => {
   
@@ -24,4 +28,7 @@ const postFood = (req, res) => {
   
 }
 
-module.exports = {postFood}
+module.exports = {
+  postFood,
+  getFoods
+}

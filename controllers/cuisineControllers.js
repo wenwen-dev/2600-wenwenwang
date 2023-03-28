@@ -3,7 +3,7 @@ const Cuisine = require('./../models/Cuisine');
 
 const getCuisines = (req, res) => {
   Cuisine.find({})
-  .then(results => res.status(200).json(results))
+  .then(results => res.status(200).send(results.data))
   .catch(error => res.json(error));
 }
 

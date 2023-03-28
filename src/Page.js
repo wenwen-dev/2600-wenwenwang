@@ -12,11 +12,14 @@ const Page = props => {
     displayedForm = <FoodForm />
   }
 
+
   return (
     <>
       {/* {<pageTitle>} */}
-      <RandomSelection />
+      <RandomSelection currentSelection={props.currentSelection}/>
       {displayedForm}
+      {/* <displayAll /> */}
+      <p>{props.currentSelection}</p>
     </>
   )
 }
