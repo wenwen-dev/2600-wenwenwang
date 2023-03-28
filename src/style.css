@@ -52,7 +52,12 @@ h2 {
   color: #ffc0cb;
 }
 
-.random-display {
+.food-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.food-list li {
+  list-style: none;
+  border: 1px solid gold;
 }
