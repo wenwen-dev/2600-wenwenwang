@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import FoodSection from './FoodSection';
 import CuisineSection from './CuisineSection';
 import RestaurantSection from './RestaurantSection';
+// import bg from './bg2.jpg';
 
 
 const App = props => {
@@ -18,18 +19,17 @@ const App = props => {
     setInterval(()=>console.log(`3 seconds: ${currentSelection}`), 3000);
   }
 
-  if (currentSelection === 'Food') {
-    displayedComponent = <FoodSection currentSelection={currentSelection}/>
-  }
-  else if (currentSelection === 'Restaurant') {
+  if (currentSelection === 'Restaurant') {
     displayedComponent = <RestaurantSection currentSelection={currentSelection}/>
   }
   else if (currentSelection === 'Cuisine') {
     displayedComponent = <CuisineSection currentSelection={currentSelection}/>
   }
+
   else {
-    displayedComponent = <><h2>hahaha</h2></>
+      displayedComponent = <FoodSection currentSelection={currentSelection}/>
   }
+
   // useEffect(function display() {
   //   if (currentSelection === 'Food') {
   //     console.log(`Food should be rendered`);
@@ -47,9 +47,14 @@ const App = props => {
 
 return (
   <>
-    <h1>Best Food in Vancouver</h1>
-    <Navbar selectComponent={selectComponent}/>
-    {displayedComponent}
+    <header>
+      <h1>Yum</h1>
+      <Navbar className='nav' selectComponent={selectComponent}/>
+    </header>
+    <main>
+      {displayedComponent}
+    </main>
+    
     
 
   </>

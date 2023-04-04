@@ -1,3 +1,5 @@
+
+
 html {
   box-sizing: border-box;
 }
@@ -8,8 +10,9 @@ html {
 
 body {
   height: 100vh;
-  background-color: #3D5656;
-  color: #CFFDE1;
+  background-color: #fafafa;
+  color: #151515;
+  padding: 0 1rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -17,11 +20,19 @@ body {
 
 }
 
+header {
+  display: flex;
+  gap: 50px;
+}
+
 h1 {
-  text-align: center;
+  font-family: 'Gajraj One', cursive;
+  font-size: 3rem;
 }
 
 nav ul {
+  font-family: 'Gajraj One', cursive;
+  padding-top: 30px;
   display: flex;
   justify-content: center;
   gap: 3rem;
@@ -34,7 +45,8 @@ a {
 }
 
 a:link, a:visited {
-  color: #CFFDE1;
+  color: #BBD6B8;
+  font-size: 1.5rem;
 }
 
 a:hover {
