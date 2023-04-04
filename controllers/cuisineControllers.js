@@ -2,9 +2,13 @@ const Cuisine = require('./../models/Cuisine');
 
 
 const getCuisines = (req, res) => {
-  Cuisine.find({})
-  .then(results => res.status(200).send(results.data))
-  .catch(error => res.json(error));
+  Cuisine.find({}).exec()
+  .then(results => {
+    res.json(results);
+    console.log(results);
+    console.log('all cuisines sent!');
+  })
+  .catch(error => console.log(error));
 }
 
 const getCuisine = (req, res) => {
@@ -16,15 +20,15 @@ const getCuisine = (req, res) => {
 const postCuisine = (req, res) => {
   
   let newCuisine = new Cuisine({
-    name: 'Mediterranean',
-    // foods: [{
-    //   name: 'yu xiang'
-    // }] - //TODO: does not work, why? I do NOT need to create Food from Cuisine, but would be good to find out why it does not work.
+    name: req.body.name,
+    // foods: []
   });
 
-
   newCuisine.save()
-  .then(result => res.status(200).json(result))
+  .then(result => {
+    console.log('new cuisine saved');
+    res.json(result);
+  })
   .catch(error => res.json(error));
 }
 
