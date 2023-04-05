@@ -5,6 +5,7 @@ import axios from 'axios';
 const CuisineSection = props => {
 
   const [cuisineName, setCuisineName] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(function getAllCuisines() {
     axios.get('/api/v1/cuisines')
@@ -26,18 +27,23 @@ const CuisineSection = props => {
     event.preventDefault();
     axios.post('/api/v1/cuisines', {
       'name': cuisineName,
-      'foods': []
     })
     .then(result=>{
-      console.log(result.data);
-      // setMessage('successfully added')
-      // message = 'added!'//why not work?
+      console.log(`Result from api is: ${result}`);
+      updateMessage(event, `Successfully added ${cuisineName} cuisines.`);
       return axios.get('/api/v1/cuisines')
     })
     .then(results => {
       props.setAllCuisines(results.data);
     })
-    .catch(error=>console.log(error))
+    .catch(error=>{
+      updateMessage(event, `Error: ${error.response.data}`)
+    })
+  }
+
+  const updateMessage = (event, msg) => {
+    event.preventDefault();
+    setMessage(msg);
   }
 
   return (
@@ -52,6 +58,7 @@ const CuisineSection = props => {
           </label>
           <button>Add</button>
         </form>
+        <p>{message}</p>
       </div>
       <div>
           <h3>All Cuisines</h3>
@@ -59,7 +66,6 @@ const CuisineSection = props => {
             {props.allCuisines.map(cuisine=><li key={cuisine.name}>{cuisine.name}</li>)}
           </ul>
         </div>
-
     </>
   )
 }

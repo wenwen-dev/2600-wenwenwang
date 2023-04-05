@@ -8227,6 +8227,10 @@ var CuisineSection = function CuisineSection(props) {
     _useState2 = _slicedToArray(_useState, 2),
     cuisineName = _useState2[0],
     setCuisineName = _useState2[1];
+  var _useState3 = useState(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    message = _useState4[0],
+    setMessage = _useState4[1];
   useEffect(function getAllCuisines() {
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/v1/cuisines').then(function (results) {
       return props.setAllCuisines(results.data);
@@ -8247,18 +8251,20 @@ var CuisineSection = function CuisineSection(props) {
   var addCuisine = function addCuisine(event) {
     event.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/v1/cuisines', {
-      'name': cuisineName,
-      'foods': []
+      'name': cuisineName
     }).then(function (result) {
-      console.log(result.data);
-      // setMessage('successfully added')
-      // message = 'added!'//why not work?
+      console.log("Result from api is: ".concat(result));
+      updateMessage(event, "Successfully added ".concat(cuisineName, " cuisines."));
       return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/v1/cuisines');
     }).then(function (results) {
       props.setAllCuisines(results.data);
     })["catch"](function (error) {
-      return console.log(error);
+      updateMessage(event, "Error: ".concat(error.response.data));
     });
+  };
+  var updateMessage = function updateMessage(event, msg) {
+    event.preventDefault();
+    setMessage(msg);
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Cuisines"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "cuisine-form"
@@ -8271,7 +8277,7 @@ var CuisineSection = function CuisineSection(props) {
       return updateCuisineName(event);
     },
     value: cuisineName
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Add"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "All Cuisines"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Add")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, message)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "All Cuisines"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
     id: "all-cuisines"
   }, props.allCuisines.map(function (cuisine) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
@@ -8464,7 +8470,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\nhtml {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #fafafa;\n  color: #151515;\n  padding: 0 1rem;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nheader {\n  display: flex;\n  gap: 50px;\n}\n\nh1 {\n  font-family: 'Gajraj One', cursive;\n  font-size: 3rem;\n  color: #A4BC92;\n}\n\nnav ul {\n  font-family: 'Gajraj One', cursive;\n  padding-top: 30px;\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #BBD6B8;\n  font-size: 1.5rem;\n}\n\na:hover {\n  color: #ffc0cb;\n\n}\n\nli:hover{\n  color: #ffc0cb;\n\n}\n\nh2 {\n  color: #539165;\n}\n\ninput,\nlabel,\ntextarea {\n  display: block;\n}\n\n#cuisine-form,\n#new-food {\n  border: 1px solid green;\n}\n\n#all-cuisines {\n  display: grid;\n  gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: repeat(2, 250px);\n  grid-auto-rows: 250px;\n\n}\n\n#all-cuisines li {\n  list-style: none;\n  padding: 10px;\n  background-color: #EDF1D6;\n  border-radius: 10px;\n  color: #40513B;\n  overflow: scroll;\n}", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":";;AAEA;EACE,sBAAsB;AACxB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,yBAAyB;EACzB,cAAc;EACd,eAAe;EACf,0JAA0J;AAC5J;;AAEA;;AAEA;;AAEA;EACE,aAAa;EACb,SAAS;AACX;;AAEA;EACE,kCAAkC;EAClC,eAAe;EACf,cAAc;AAChB;;AAEA;EACE,kCAAkC;EAClC,iBAAiB;EACjB,aAAa;EACb,uBAAuB;EACvB,SAAS;EACT,qBAAqB;EACrB,iBAAiB;AACnB;;AAEA;EACE,qBAAqB;AACvB;;AAEA;EACE,cAAc;EACd,iBAAiB;AACnB;;AAEA;EACE,cAAc;;AAEhB;;AAEA;EACE,cAAc;;AAEhB;;AAEA;EACE,cAAc;AAChB;;AAEA;;;EAGE,cAAc;AAChB;;AAEA;;EAEE,uBAAuB;AACzB;;AAEA;EACE,aAAa;EACb,SAAS;EACT,qCAAqC;EACrC,oCAAoC;EACpC,qBAAqB;;AAEvB;;AAEA;EACE,gBAAgB;EAChB,aAAa;EACb,yBAAyB;EACzB,mBAAmB;EACnB,cAAc;EACd,gBAAgB;AAClB","sourcesContent":["\n\nhtml {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #fafafa;\n  color: #151515;\n  padding: 0 1rem;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nheader {\n  display: flex;\n  gap: 50px;\n}\n\nh1 {\n  font-family: 'Gajraj One', cursive;\n  font-size: 3rem;\n  color: #A4BC92;\n}\n\nnav ul {\n  font-family: 'Gajraj One', cursive;\n  padding-top: 30px;\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #BBD6B8;\n  font-size: 1.5rem;\n}\n\na:hover {\n  color: #ffc0cb;\n\n}\n\nli:hover{\n  color: #ffc0cb;\n\n}\n\nh2 {\n  color: #539165;\n}\n\ninput,\nlabel,\ntextarea {\n  display: block;\n}\n\n#cuisine-form,\n#new-food {\n  border: 1px solid green;\n}\n\n#all-cuisines {\n  display: grid;\n  gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: repeat(2, 250px);\n  grid-auto-rows: 250px;\n\n}\n\n#all-cuisines li {\n  list-style: none;\n  padding: 10px;\n  background-color: #EDF1D6;\n  border-radius: 10px;\n  color: #40513B;\n  overflow: scroll;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\nhtml {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #fafafa;\n  color: #151515;\n  padding: 0 1rem;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nheader {\n  display: flex;\n  gap: 50px;\n}\n\nh1 {\n  font-family: 'Gajraj One', cursive;\n  font-size: 3rem;\n  color: #A4BC92;\n}\n\nnav ul {\n  font-family: 'Gajraj One', cursive;\n  padding-top: 30px;\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #BBD6B8;\n  font-size: 1.5rem;\n}\n\na:hover {\n  color: #ffc0cb;\n\n}\n\nli:hover{\n  color: #ffc0cb;\n\n}\n\nh2 {\n  color: #539165;\n}\n\ninput,\nlabel,\ntextarea {\n  display: block;\n}\n\n#cuisine-form,\n#new-food {\n  border: 1px solid green;\n}\n\n#all-cuisines {\n  display: grid;\n  gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  grid-auto-rows: 100px;\n\n}\n\n#all-cuisines li {\n  list-style: none;\n  padding: 10px;\n  background-color: #EDF1D6;\n  border-radius: 10px;\n  color: #40513B;\n  overflow: scroll;\n}", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":";;AAEA;EACE,sBAAsB;AACxB;;AAEA;EACE,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,yBAAyB;EACzB,cAAc;EACd,eAAe;EACf,0JAA0J;AAC5J;;AAEA;;AAEA;;AAEA;EACE,aAAa;EACb,SAAS;AACX;;AAEA;EACE,kCAAkC;EAClC,eAAe;EACf,cAAc;AAChB;;AAEA;EACE,kCAAkC;EAClC,iBAAiB;EACjB,aAAa;EACb,uBAAuB;EACvB,SAAS;EACT,qBAAqB;EACrB,iBAAiB;AACnB;;AAEA;EACE,qBAAqB;AACvB;;AAEA;EACE,cAAc;EACd,iBAAiB;AACnB;;AAEA;EACE,cAAc;;AAEhB;;AAEA;EACE,cAAc;;AAEhB;;AAEA;EACE,cAAc;AAChB;;AAEA;;;EAGE,cAAc;AAChB;;AAEA;;EAEE,uBAAuB;AACzB;;AAEA;EACE,aAAa;EACb,SAAS;EACT,qCAAqC;EACrC,qBAAqB;;AAEvB;;AAEA;EACE,gBAAgB;EAChB,aAAa;EACb,yBAAyB;EACzB,mBAAmB;EACnB,cAAc;EACd,gBAAgB;AAClB","sourcesContent":["\n\nhtml {\n  box-sizing: border-box;\n}\n\n*, *::before, *::after {\n  box-sizing: inherit;\n}\n\nbody {\n  height: 100vh;\n  background-color: #fafafa;\n  color: #151515;\n  padding: 0 1rem;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n}\n\n#react-container {\n\n}\n\nheader {\n  display: flex;\n  gap: 50px;\n}\n\nh1 {\n  font-family: 'Gajraj One', cursive;\n  font-size: 3rem;\n  color: #A4BC92;\n}\n\nnav ul {\n  font-family: 'Gajraj One', cursive;\n  padding-top: 30px;\n  display: flex;\n  justify-content: center;\n  gap: 3rem;\n  list-style-type: none;\n  font-size: 1.3rem;\n}\n\na {\n  text-decoration: none;\n}\n\na:link, a:visited {\n  color: #BBD6B8;\n  font-size: 1.5rem;\n}\n\na:hover {\n  color: #ffc0cb;\n\n}\n\nli:hover{\n  color: #ffc0cb;\n\n}\n\nh2 {\n  color: #539165;\n}\n\ninput,\nlabel,\ntextarea {\n  display: block;\n}\n\n#cuisine-form,\n#new-food {\n  border: 1px solid green;\n}\n\n#all-cuisines {\n  display: grid;\n  gap: 20px;\n  grid-template-columns: repeat(3, 1fr);\n  grid-auto-rows: 100px;\n\n}\n\n#all-cuisines li {\n  list-style: none;\n  padding: 10px;\n  background-color: #EDF1D6;\n  border-radius: 10px;\n  color: #40513B;\n  overflow: scroll;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
