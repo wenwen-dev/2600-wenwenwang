@@ -5,7 +5,7 @@ import CuisineSection from './CuisineSection';
 
 
 const App = props => {
-  const [currentSelection, setCurrentSelection] = useState('Food');
+  const [currentSelection, setCurrentSelection] = useState('Cuisine');
   const [allCuisines, setAllCuisines] = useState([]);
 
 
@@ -16,12 +16,12 @@ const App = props => {
     setCurrentSelection(event.target.innerHTML);
   }
 
-  if (currentSelection === 'Cuisine') {
-    displayedComponent = <CuisineSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
+  if (currentSelection === 'Food') {
+    displayedComponent = <FoodSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
   }
 
   else {
-      displayedComponent = <FoodSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
+      displayedComponent = <CuisineSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
   }
  
 

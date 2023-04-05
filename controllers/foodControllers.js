@@ -26,14 +26,27 @@ const postFood = (req, res) => {
   .then(result => {
     console.log(`the value is ${cuisine}`);
     let foundCuisine = result;
-    let newFood = new Food({
-      name: name,
-      description: description
-    });
-    foundCuisine.foods.push(newFood);
-    foundCuisine.save()
-    .then(result=>res.json(result))
-    .catch(error=>console.log(error))
+
+    let match = foundCuisine.foods.find(food=>food.name === name);
+    console.log(`search for food with same name: ${match}`);
+
+    if (match) { //why does match.length > 0 not work
+      console.log(`found a match`);
+      res.status(400).json('Food already exists.')
+    }
+    else {
+      console.log(`not found a match`);
+
+      let newFood = new Food({
+        name: name,
+        description: description
+      });
+      foundCuisine.foods.push(newFood);
+      foundCuisine.save()
+      .then(result=>res.status(200).json(result))
+      .catch(error=>console.log(error))
+    }
+
 
   })
   .catch(error=>console.log(error))

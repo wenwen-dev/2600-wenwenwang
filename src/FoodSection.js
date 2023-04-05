@@ -5,8 +5,10 @@ import axios from 'axios';
 const FoodSection = props => {
   const [chosenCuisine, setChosenCuisine] = useState('');
   const [chosenCuisine2, setChosenCuisine2] = useState('');
-  const [newFoodName, setNewFoodName] = useState('');
+  const [foodName, setFoodName] = useState('');
   const [description, setDescription] = useState('');
+  const [message, setMessage] = useState('');
+
 
   const updateChosenCuisine = event => {
     setChosenCuisine(event.target.value);
@@ -21,7 +23,7 @@ const FoodSection = props => {
   }
 
   const updateFoodName = event => {
-    setNewFoodName(event.target.value);
+    setFoodName(event.target.value);
     console.log(event.target.value);
   }
 
@@ -31,14 +33,23 @@ const FoodSection = props => {
 
   const addFood = event => {
     event.preventDefault();
-    // console.log(event.target.cuisine.value);
     axios.post('/api/v1/foods', {
       'cuisine': chosenCuisine,
-      'name': newFoodName,
+      'name': foodName,
       'description': description
     })
-    .then(result => console.log(result))
-    .catch(error=>console.log(error))
+    .then(result => {
+      updateMessage(event, `Successfully added ${foodName}`)
+    })
+    .catch(error=> {
+      console.log(error);
+      updateMessage(event, `Error: ${error.response.data}`)
+    })
+  }
+
+  const updateMessage = (event, msg) => {
+    event.preventDefault();
+    setMessage(msg);
   }
 
   const getFoodsOfCuisine = event => {
@@ -52,27 +63,30 @@ const FoodSection = props => {
   return (
     <>
       <h2>Food</h2>
-      <div id='new-food'>
+      <div id='food-form'>
         <h3>Add a food</h3>
         <form onSubmit={event=>addFood(event)}>
           <label htmlFor='cuisine-select'>Choose a cuisine: 
           </label>
-          <select name='cuisine' onChange={updateChosenCuisine} defaultValue='default'>
+          <select name='cuisine' id='cuisine-select' onChange={updateChosenCuisine} 
+          defaultValue='default'>
+            {/* Qs: pass event as a parameter above, then too many re-rerenderings why? */}
             <option disabled value='default'>-- choose a cuisine --</option>
-            {props.allCuisines.map(cuisine=><option value={cuisine.name}>{cuisine.name}</option>)}
+            {props.allCuisines.map(cuisine=><option value={cuisine.name} key={cuisine.name}>{cuisine.name}</option>)}
           </select>
           <label>Food name:  
-            <input type="text" onChange={event=>updateFoodName(event)} value={newFoodName}/>
+            <input type="text" onChange={event=>updateFoodName(event)} value={foodName}/>
           </label>
           <label>
             Description: 
             <textarea onChange={updateDescription}></textarea></label>
           <button>submit food</button>
+          <p>{message}</p>
         </form>
       </div>
       <div>
         {/* the following does not work FIXME: */}
-        <h3>All Foods</h3>
+        {/* <h3>All Foods</h3>
           <form onSubmit={getFoodsOfCuisine}>
             <label htmlFor='cuisine-select'>Choose a cuisine: 
             </label>
@@ -81,12 +95,12 @@ const FoodSection = props => {
               {props.allCuisines.map(cuisine=><option value={cuisine.name}>{cuisine.name}</option>)}
             </select>
             <button>Find</button>
-          </form>
+          </form> */}
 
           
-            <ul id='all-foods'>
+            {/* <ul id='all-foods'>
 
-            </ul>
+            </ul> */}
       </div>
     </>
   )
