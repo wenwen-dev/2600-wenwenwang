@@ -64,7 +64,14 @@ h2 {
   color: #539165;
 }
 
-#new-cuisine {
+input,
+label,
+textarea {
+  display: block;
+}
+
+#new-cuisine,
+#new-food {
   border: 1px solid green;
 }
 

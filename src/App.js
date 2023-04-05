@@ -7,6 +7,8 @@ import RestaurantSection from './RestaurantSection';
 
 const App = props => {
   const [currentSelection, setCurrentSelection] = useState('Food');
+  const [allCuisines, setAllCuisines] = useState([]);
+
 
   let displayedComponent = <></>;
 
@@ -18,14 +20,14 @@ const App = props => {
   }
 
   if (currentSelection === 'Restaurant') {
-    displayedComponent = <RestaurantSection currentSelection={currentSelection}/>
+    displayedComponent = <RestaurantSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
   }
   else if (currentSelection === 'Cuisine') {
-    displayedComponent = <CuisineSection currentSelection={currentSelection}/>
+    displayedComponent = <CuisineSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
   }
 
   else {
-      displayedComponent = <FoodSection currentSelection={currentSelection}/>
+      displayedComponent = <FoodSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
   }
  
 

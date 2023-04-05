@@ -5,12 +5,11 @@ import axios from 'axios';
 const CuisineSection = props => {
 
   const [cuisineName, setCuisineName] = useState('');
-  const [allCuisines, setAllCuisines] = useState([]);
   // const [message, setMessage] = useState('');
 
   useEffect(function getAllCuisines() {
     axios.get('/api/v1/cuisines')
-    .then(results => setAllCuisines(results.data))
+    .then(results => props.setAllCuisines(results.data))
     .catch(error=>console.log(error))
   }, [])
 
@@ -34,7 +33,7 @@ const CuisineSection = props => {
       return axios.get('/api/v1/cuisines')
     })
     .then(results => {
-      setAllCuisines(results.data);
+      props.setAllCuisines(results.data);
     })
     .catch(error=>console.log(error))
   }
@@ -56,7 +55,7 @@ const CuisineSection = props => {
       <div>
           <h3>All Cuisines</h3>
           <ul id='all-cuisines'>
-            {allCuisines.map(cuisine=><li>{cuisine.name}</li>)}
+            {props.allCuisines.map(cuisine=><li>{cuisine.name}</li>)}
           </ul>
         </div>
 
