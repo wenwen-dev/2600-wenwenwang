@@ -5,7 +5,6 @@ import axios from 'axios';
 const CuisineSection = props => {
 
   const [cuisineName, setCuisineName] = useState('');
-  // const [message, setMessage] = useState('');
 
   useEffect(function getAllCuisines() {
     axios.get('/api/v1/cuisines')
@@ -13,7 +12,10 @@ const CuisineSection = props => {
     .catch(error=>console.log(error))
   }, [])
 
-  
+    // axios.get('/api/v1/cuisines')
+    // .then(results => props.setAllCuisines(results.data))
+    // .catch(error=>console.log(error))
+    // Qs: only useEffect works, above would cause non-stop rendering. Why?
 
   const updateCuisineName = (event) => {
     setCuisineName(event.target.value);
@@ -41,7 +43,7 @@ const CuisineSection = props => {
   return (
     <>
       <h2>Cuisines</h2>
-      <div id="new-cuisine">
+      <div id="cuisine-form">
         <h3>Add a new cuisine</h3>
         <form onSubmit={event=>addCuisine(event)}>
           <label>
@@ -50,12 +52,11 @@ const CuisineSection = props => {
           </label>
           <button>Add</button>
         </form>
-        {/* <p>{message}</p> */}
       </div>
       <div>
           <h3>All Cuisines</h3>
           <ul id='all-cuisines'>
-            {props.allCuisines.map(cuisine=><li>{cuisine.name}</li>)}
+            {props.allCuisines.map(cuisine=><li key={cuisine.name}>{cuisine.name}</li>)}
           </ul>
         </div>
 

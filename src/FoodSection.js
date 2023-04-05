@@ -85,7 +85,7 @@ const FoodSection = props => {
 
           
             <ul id='all-foods'>
-              {props.allCuisines.map(cuisine=><li>{cuisine.name}</li>)}
+
             </ul>
       </div>
     </>

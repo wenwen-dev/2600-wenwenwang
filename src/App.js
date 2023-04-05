@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import FoodSection from './FoodSection';
 import CuisineSection from './CuisineSection';
-import RestaurantSection from './RestaurantSection';
 
 
 const App = props => {
@@ -15,14 +14,9 @@ const App = props => {
   const selectComponent = event => {
     event.preventDefault();
     setCurrentSelection(event.target.innerHTML);
-    console.log(event.target.innerHTML);
-    console.log(currentSelection);
   }
 
-  if (currentSelection === 'Restaurant') {
-    displayedComponent = <RestaurantSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
-  }
-  else if (currentSelection === 'Cuisine') {
+  if (currentSelection === 'Cuisine') {
     displayedComponent = <CuisineSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
   }
 
