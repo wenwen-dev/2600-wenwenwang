@@ -2,12 +2,6 @@ const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let FoodSchema = new Schema({
-  // cuisine: {
-  //   type: String,
-  //   required: true,
-  //   minLength: 2,
-  //   maxLength: 50
-  // },
   name: {
     type: String,
     required: true,
@@ -23,7 +17,7 @@ const Food = mongoose.model('Food', FoodSchema);
 
 module.exports = {
   Food,
-  FoodSchema, //TODO: Missed this -> type error!
+  FoodSchema, //DIGEST: Missed this -> type error!
 };
 
 

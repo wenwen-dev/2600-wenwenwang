@@ -8254,7 +8254,8 @@ var CuisineSection = function CuisineSection(props) {
       'name': cuisineName
     }).then(function (result) {
       console.log("Result from api is: ".concat(result));
-      updateMessage(event, "Successfully added ".concat(cuisineName, " cuisines."));
+      updateMessage(event, "Successfully added ".concat(cuisineName, "."));
+      console.log(result);
       return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/v1/cuisines');
     }).then(function (results) {
       props.setAllCuisines(results.data);
@@ -8357,7 +8358,7 @@ var FoodSection = function FoodSection(props) {
       'name': foodName,
       'description': description
     }).then(function (result) {
-      updateMessage(event, "Successfully added ".concat(foodName));
+      updateMessage(event, "Successfully added ".concat(foodName, " to ").concat(chosenCuisine, " cuisine."));
     })["catch"](function (error) {
       console.log(error);
       updateMessage(event, "Error: ".concat(error.response.data));

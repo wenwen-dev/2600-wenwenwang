@@ -19,6 +19,12 @@ const getFoods = (req, res) => {
 // }
 
 const postFood = (req, res) => {
+  if (res.locals.errors != null) {
+    res.status(400).json(res.locals.errors[0].message);
+  } 
+
+  else {
+
   const { cuisine, name, description } = req.body;
   console.log(`3 values are: ${cuisine}, ${name}, ${description}`);
   Cuisine.findOne({name: cuisine})
@@ -47,9 +53,12 @@ const postFood = (req, res) => {
       .catch(error=>console.log(error))
     }
 
-
   })
   .catch(error=>console.log(error))
+
+  }
+
+
 
   
 }

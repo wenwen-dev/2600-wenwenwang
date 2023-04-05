@@ -30,14 +30,16 @@ const CuisineSection = props => {
     })
     .then(result=>{
       console.log(`Result from api is: ${result}`);
-      updateMessage(event, `Successfully added ${cuisineName} cuisines.`);
+      updateMessage(event, `Successfully added ${cuisineName}.`);
+      console.log(result);
       return axios.get('/api/v1/cuisines')
     })
     .then(results => {
       props.setAllCuisines(results.data);
     })
     .catch(error=>{
-      updateMessage(event, `Error: ${error.response.data}`)
+        updateMessage(event, `Error: ${error.response.data}`)
+      
     })
   }
 

@@ -39,7 +39,7 @@ const FoodSection = props => {
       'description': description
     })
     .then(result => {
-      updateMessage(event, `Successfully added ${foodName}`)
+      updateMessage(event, `Successfully added ${foodName} to ${chosenCuisine} cuisine.`)
     })
     .catch(error=> {
       console.log(error);
