@@ -5,15 +5,14 @@ const Cuisine = require('./../models/Cuisine');
 const getFoods = (req, res) => {
   Food.find({})
   .exec()
-  .then(results=>res.json(results))
+  .then(results=>res.status(200).json(results))
   .catch(error=>console.log(error))
-
 }
 
 // const getFood = (req, res) => {
 //   Food.find({name: req.params.id})
 //   .exec()
-//   .then(result => res.json(result))
+//   .then(result => res.status(200).json(result))
 //   .catch(error=>console.log(error))
   
 // }
@@ -63,22 +62,6 @@ const postFood = (req, res) => {
   
 }
 
-  // app.post('/songs', (req, res) => {
-  //   Album.findOne({name: req.body.album})
-  //   .exec((error, result) => {
-  //     if (error) res.json(error);
-  //     else if (result == null) res.send('No album with that name.');
-  //     else {
-  //       let foundAlbum = result;
-  //       let newSong = new Song({
-  //         name: req.body.songName,
-  //         lengthSeconds: req.body.songLength
-  //       });
-  //       foundAlbum.songs.push(newSong);
-  //       foundAlbum.save((error, result) => {
-  //         if (error) res.json(error);
-  //         else res.json(newSong);
-  //       })
 
 module.exports = {
   postFood,

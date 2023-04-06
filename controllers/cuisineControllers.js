@@ -1,11 +1,9 @@
 const Cuisine = require('./../models/Cuisine');
 
-
-
 const getCuisines = (req, res) => {
   Cuisine.find({}).exec()
   .then(results => {
-    res.json(results);
+    res.status(200).json(results);
     // console.log(results);
     console.log('all cuisines sent!');
   })
@@ -19,7 +17,7 @@ const getCuisine = (req, res) => {
     console.log(`ahaha: # ${result}`);
     res.status(200).json(result);
   })
-  .catch(error => res.json(error));
+  .catch(error => res.status(400).json(error));
 }
 
 const postCuisine = (req,res) => {
@@ -32,7 +30,7 @@ const postCuisine = (req,res) => {
     .then(result => {
       console.log(`result found: ${result}`);
       if (result.length > 0) {
-        res.status(400).json('Cuisine already exists.')
+        res.status(400).json(`${req.body.name} cuisine already exists.`)
       }
       else {
         let newCuisine = new Cuisine({
@@ -43,7 +41,6 @@ const postCuisine = (req,res) => {
         .then(result => {
           res.status(200).json(result);
         })  
-        // .catch(error => res.json(error));
         .catch(error => console.log(error));
       }
     })

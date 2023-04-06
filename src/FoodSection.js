@@ -80,25 +80,23 @@ const FoodSection = props => {
             Description: 
             <textarea onChange={updateDescription}></textarea></label>
           <button>submit food</button>
-          <p>{message}</p>
+          <p className='msg'>{message}</p>
         </form>
       </div>
-      <div>
+      <div id='dinner-form'>
         <h3>Ideas for dinner</h3>
-          <form onSubmit={getFoodsOfCuisine}>
-            <label htmlFor='cuisine-select'>Choose a cuisine: 
-            </label>
-            <CuisineSelect updateChosenCuisine={updateChosenCuisine2} allCuisines={props.allCuisines}/>
+        <form onSubmit={getFoodsOfCuisine} >
+          <label htmlFor='cuisine-select'>Choose a cuisine: 
+          </label>
+          <CuisineSelect updateChosenCuisine={updateChosenCuisine2} allCuisines={props.allCuisines}/>
 
-            <button>See delicious food suggestions</button>
-          </form>
-
-          
-            <ul id='foods-of-cuisine'>
-              {foodsOfCuisine.map(food=><li key={food.name}><strong>{food.name}</strong><p>{food.description}</p></li>)}
-
-            </ul>
+          <button>see recommendations</button>
+        </form>
       </div>
+      <ul id='foods-of-cuisine'>
+            {foodsOfCuisine.map(food=><li key={food.name}><strong>{food.name}</strong><p>{food.description}</p></li>)}
+
+      </ul>
     </>
   )
 }

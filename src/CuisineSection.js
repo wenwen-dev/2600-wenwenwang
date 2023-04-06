@@ -50,7 +50,7 @@ const CuisineSection = props => {
 
   return (
     <>
-      <h2>Cuisines</h2>
+      <h2>Cuisine</h2>
       <div id="cuisine-form">
         <h3>Add a new cuisine</h3>
         <form onSubmit={event=>addCuisine(event)}>
@@ -60,7 +60,7 @@ const CuisineSection = props => {
           </label>
           <button>Add</button>
         </form>
-        <p>{message}</p>
+        <p className='msg'>{message}</p>
       </div>
       <div>
           <h3>All Cuisines</h3>
