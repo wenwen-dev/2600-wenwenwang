@@ -8390,6 +8390,10 @@ var FoodSection = function FoodSection(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     foodsOfCuisine = _useState12[0],
     setFoodsOfCuisine = _useState12[1];
+  var _useState13 = useState(''),
+    _useState14 = _slicedToArray(_useState13, 2),
+    message2 = _useState14[0],
+    setMessage2 = _useState14[1];
 
   // let wishlistMsg = <></>;
 
@@ -8434,7 +8438,14 @@ var FoodSection = function FoodSection(props) {
     event.preventDefault();
     if (!props.wishlist.includes(newItem)) {
       props.setWishlist([].concat(_toConsumableArray(props.wishlist), [newItem]));
+      updateMessage2(event, "Added ".concat(newItem, " to wishlist."));
+    } else {
+      updateMessage2(event, 'could not add to wishlist - item already exists');
     }
+  };
+  var updateMessage2 = function updateMessage2(event, msg) {
+    event.preventDefault();
+    setMessage2(msg);
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Food"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "food-form"
@@ -8476,7 +8487,9 @@ var FoodSection = function FoodSection(props) {
         return addToWishlist(event, food.name);
       }
     }, "add to wishlist"));
-  })));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "msg"
+  }, message2)));
 };
 
 // addToWishlist(event, food.name)

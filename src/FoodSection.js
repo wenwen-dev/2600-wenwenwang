@@ -10,6 +10,8 @@ const FoodSection = props => {
   const [description, setDescription] = useState('');
   const [message, setMessage] = useState('');
   const [foodsOfCuisine, setFoodsOfCuisine] = useState([]);
+  const [message2, setMessage2] = useState('');
+
 
   // let wishlistMsg = <></>;
 
@@ -63,7 +65,16 @@ const FoodSection = props => {
     event.preventDefault();
     if (!props.wishlist.includes(newItem)) {
       props.setWishlist([...props.wishlist, newItem]);
+      updateMessage2(event, `Added ${newItem} to wishlist.`)
     }
+    else {
+      updateMessage2(event, 'could not add to wishlist - item already exists')
+    }
+  }
+
+  const updateMessage2 = (event, msg) => {
+    event.preventDefault();
+    setMessage2(msg);
   }
 
   return (
@@ -97,6 +108,7 @@ const FoodSection = props => {
       </div>
       <ul id='foods-of-cuisine'>
         {foodsOfCuisine.map(food=><li key={food.name}><strong>{food.name}</strong><p>{food.description}</p><button onClick={event => addToWishlist(event, food.name)}>add to wishlist</button></li>)}
+        <p className='msg'>{message2}</p>
       </ul>
     </>
   )
