@@ -13,8 +13,12 @@ const getCuisines = (req, res) => {
 }
 
 const getCuisine = (req, res) => {
-  Cuisine.find({_id: req.params.cuisineID}).exec()
-  .then(result => res.json(result))
+  Cuisine.findOne({name: req.params.cuisineID}).exec()
+  .then(result => {
+    //TODO: add if empty collection found - is it possible?
+    console.log(`ahaha: # ${result}`);
+    res.status(200).json(result);
+  })
   .catch(error => res.json(error));
 }
 

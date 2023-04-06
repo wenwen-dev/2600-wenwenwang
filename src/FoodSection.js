@@ -1,6 +1,7 @@
 import React from 'react';
 const { useState, useEffect } = React;
 import axios from 'axios';
+import CuisineSelect from './CuisineSelect';
 
 const FoodSection = props => {
   const [chosenCuisine, setChosenCuisine] = useState('');
@@ -8,6 +9,7 @@ const FoodSection = props => {
   const [foodName, setFoodName] = useState('');
   const [description, setDescription] = useState('');
   const [message, setMessage] = useState('');
+  const [foodsOfCuisine, setFoodsOfCuisine] = useState([]);
 
 
   const updateChosenCuisine = event => {
@@ -55,7 +57,9 @@ const FoodSection = props => {
   const getFoodsOfCuisine = event => {
     event.preventDefault();
     axios.get(`/api/v1/cuisines/${chosenCuisine2}`)
-    .then(result => console.log(result.data))
+    .then(result => {
+      setFoodsOfCuisine(result.data.foods)
+    })
     .catch(error=>console.log(error))
   }
   
@@ -68,12 +72,7 @@ const FoodSection = props => {
         <form onSubmit={event=>addFood(event)}>
           <label htmlFor='cuisine-select'>Choose a cuisine: 
           </label>
-          <select name='cuisine' id='cuisine-select' onChange={updateChosenCuisine} 
-          defaultValue='default'>
-            {/* Qs: pass event as a parameter above, then too many re-rerenderings why? */}
-            <option disabled value='default'>-- choose a cuisine --</option>
-            {props.allCuisines.map(cuisine=><option value={cuisine.name} key={cuisine.name}>{cuisine.name}</option>)}
-          </select>
+          <CuisineSelect updateChosenCuisine={updateChosenCuisine} allCuisines={props.allCuisines}/>
           <label>Food name:  
             <input type="text" onChange={event=>updateFoodName(event)} value={foodName}/>
           </label>
@@ -85,22 +84,20 @@ const FoodSection = props => {
         </form>
       </div>
       <div>
-        {/* the following does not work FIXME: */}
-        {/* <h3>All Foods</h3>
+        <h3>Ideas for dinner</h3>
           <form onSubmit={getFoodsOfCuisine}>
             <label htmlFor='cuisine-select'>Choose a cuisine: 
             </label>
-            <select name='cuisine2' onChange={updateChosenCuisine2} defaultValue='default'>
-              <option disabled value='default'>-- choose a cuisine --</option>
-              {props.allCuisines.map(cuisine=><option value={cuisine.name}>{cuisine.name}</option>)}
-            </select>
-            <button>Find</button>
-          </form> */}
+            <CuisineSelect updateChosenCuisine={updateChosenCuisine2} allCuisines={props.allCuisines}/>
+
+            <button>See delicious food suggestions</button>
+          </form>
 
           
-            {/* <ul id='all-foods'>
+            <ul id='foods-of-cuisine'>
+              {foodsOfCuisine.map(food=><li key={food.name}><strong>{food.name}</strong><p>{food.description}</p></li>)}
 
-            </ul> */}
+            </ul>
       </div>
     </>
   )
