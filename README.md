@@ -4,9 +4,7 @@ This is my first ever full stack project!
 
 It is part of the CPSC 2600 Full Stack Web Dev I course taught by Prof. Jordan Miller.
 
-The application contains a front-end built by React, and a backend and database built by Node.js(incl. Express) and Mongoose.
-
-- link:
+- link: https://two600-wenwenwang.onrender.com
 - Open the link above to access the program
 - This application is built by using React (frontend), Node and MongoDB (backend). It allows users to log and retrieve cuisines and foods, and also get ideas when no idea what to have for dinner.
 - features

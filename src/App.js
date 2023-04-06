@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import FoodSection from './FoodSection';
 import CuisineSection from './CuisineSection';
+import Wishlist from './Wishlist';
 
 
 const App = props => {
   const [currentSelection, setCurrentSelection] = useState('Cuisine');
   const [allCuisines, setAllCuisines] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
 
   let displayedComponent = <></>;
@@ -17,11 +19,15 @@ const App = props => {
   }
 
   if (currentSelection === 'Food') {
-    displayedComponent = <FoodSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
+    displayedComponent = <FoodSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines} wishlist={wishlist} setWishlist={setWishlist}/>
+  }
+
+  else if (currentSelection === 'Wishlist') {
+    displayedComponent = <Wishlist currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines} wishlist={wishlist} setWishlist={setWishlist}/>
   }
 
   else {
-      displayedComponent = <CuisineSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines}/>
+      displayedComponent = <CuisineSection currentSelection={currentSelection} allCuisines={allCuisines} setAllCuisines={setAllCuisines} wishlist={wishlist} setWishlist={setWishlist}/>
   }
  
 

@@ -11,6 +11,7 @@ const FoodSection = props => {
   const [message, setMessage] = useState('');
   const [foodsOfCuisine, setFoodsOfCuisine] = useState([]);
 
+  // let wishlistMsg = <></>;
 
   const updateChosenCuisine = event => {
     setChosenCuisine(event.target.value);
@@ -58,6 +59,12 @@ const FoodSection = props => {
     .catch(error=>console.log(error))
   }
   
+  const addToWishlist = (event, newItem) => {
+    event.preventDefault();
+    if (!props.wishlist.includes(newItem)) {
+      props.setWishlist([...props.wishlist, newItem]);
+    }
+  }
 
   return (
     <>
@@ -89,10 +96,13 @@ const FoodSection = props => {
         </form>
       </div>
       <ul id='foods-of-cuisine'>
-            {foodsOfCuisine.map(food=><li key={food.name}><strong>{food.name}</strong><p>{food.description}</p></li>)}
+        {foodsOfCuisine.map(food=><li key={food.name}><strong>{food.name}</strong><p>{food.description}</p><button onClick={event => addToWishlist(event, food.name)}>add to wishlist</button></li>)}
       </ul>
     </>
   )
 }
 
+// addToWishlist(event, food.name)
+
 export default FoodSection;
+
