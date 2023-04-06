@@ -1,6 +1,5 @@
 const { Food } = require('./../models/Food');
 const Cuisine = require('./../models/Cuisine');
-//TODO: used const Food, instead of { Food } -> Food is not a constructor error (coz 2 objects exported and I refer to both if not using {}!)
 
 const getFoods = (req, res) => {
   Food.find({})
@@ -23,43 +22,28 @@ const postFood = (req, res) => {
   } 
 
   else {
-
-  const { cuisine, name, description } = req.body;
-  console.log(`3 values are: ${cuisine}, ${name}, ${description}`);
-  Cuisine.findOne({name: cuisine})
-  .exec()
-  .then(result => {
-    console.log(`the value is ${cuisine}`);
-    let foundCuisine = result;
-
-    let match = foundCuisine.foods.find(food=>food.name === name);
-    console.log(`search for food with same name: ${match}`);
-
-    if (match) { //why does match.length > 0 not work
-      console.log(`found a match`);
-      res.status(400).json('Food already exists.')
-    }
-    else {
-      console.log(`not found a match`);
-
-      let newFood = new Food({
-        name: name,
-        description: description
-      });
-      foundCuisine.foods.push(newFood);
-      foundCuisine.save()
-      .then(result=>res.status(200).json(result))
-      .catch(error=>console.log(error))
-    }
-
-  })
-  .catch(error=>console.log(error))
-
+    const { cuisine, name, description } = req.body;
+    Cuisine.findOne({name: cuisine})
+    .exec()
+    .then(result => {
+      let foundCuisine = result;
+      let match = foundCuisine.foods.find(food=>food.name === name);
+      if (match) {
+        res.status(400).json('Food already exists.')
+      }
+      else {
+        let newFood = new Food({
+          name: name,
+          description: description
+        });
+        foundCuisine.foods.push(newFood);
+        foundCuisine.save()
+        .then(result=>res.status(200).json(result))
+        .catch(error=>console.log(error))
+      }
+    })
+    .catch(error=>console.log(error))
   }
-
-
-
-  
 }
 
 

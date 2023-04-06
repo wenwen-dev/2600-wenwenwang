@@ -20,31 +20,23 @@ const cuisineFormValidator = (req, res, next) => {
         type: 'string',
         minLength: 2,
         errorMessage: {
-          minLength: 'name must be at least 2 characters.'
+          minLength: 'Name of cuisine must be at least 2 characters.'
         }
       }
     },
     required: ['name'],
     errorMessage: {
       required: {
-        'name': 'yoyoyoyoyoyo You must enter a name'
+        'name': 'You must enter a cuisine name.'
       }
     }
   }
 
   const validate = ajv.compile(schema);
   validate(req.body);
-
   res.locals.errors = validate.errors;
 
-  // console.log(`Error(s) found, and they are:`);
-  // validate.errors.forEach(error=>console.log(`# ${error.message}`))
-  // console.log(`errors stored in res.locals.errors are: ${res.locals.errors[0].message}`);
-
-  // res.status(401).json(res.locals.errors);
-
   next();
-
 }
 
 const foodFormValidator = (req, res, next) => {
@@ -67,7 +59,7 @@ const foodFormValidator = (req, res, next) => {
         type: 'string',
         minLength: 2,
         errorMessage: {
-          minLength: 'name of food must be at least 2 characters.'
+          minLength: 'Name of food must be at least 2 characters.'
         }
       },
       description: {

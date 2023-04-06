@@ -17,7 +17,7 @@ const Food = mongoose.model('Food', FoodSchema);
 
 module.exports = {
   Food,
-  FoodSchema, //DIGEST: Missed this -> type error!
+  FoodSchema,
 };
 
 

@@ -13,14 +13,8 @@ const CuisineSection = props => {
     .catch(error=>console.log(error))
   }, [])
 
-    // axios.get('/api/v1/cuisines')
-    // .then(results => props.setAllCuisines(results.data))
-    // .catch(error=>console.log(error))
-    // Qs: only useEffect works, above would cause non-stop rendering. Why?
-
   const updateCuisineName = (event) => {
     setCuisineName(event.target.value);
-    console.log(cuisineName);
   }
 
   const addCuisine = event => {
@@ -29,9 +23,7 @@ const CuisineSection = props => {
       'name': cuisineName,
     })
     .then(result=>{
-      console.log(`Result from api is: ${result}`);
       updateMessage(event, `Successfully added ${cuisineName}.`);
-      console.log(result);
       return axios.get('/api/v1/cuisines')
     })
     .then(results => {
@@ -39,7 +31,6 @@ const CuisineSection = props => {
     })
     .catch(error=>{
         updateMessage(event, `Error: ${error.response.data}`)
-      
     })
   }
 

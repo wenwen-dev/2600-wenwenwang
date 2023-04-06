@@ -14,19 +14,14 @@ const FoodSection = props => {
 
   const updateChosenCuisine = event => {
     setChosenCuisine(event.target.value);
-    console.log(event.target.value);
-    console.log(chosenCuisine);
   }
 
   const updateChosenCuisine2 = event => {
     setChosenCuisine2(event.target.value);
-    console.log(event.target.value);
-    console.log(chosenCuisine2);
   }
 
   const updateFoodName = event => {
     setFoodName(event.target.value);
-    console.log(event.target.value);
   }
 
   const updateDescription = event => {
@@ -95,7 +90,6 @@ const FoodSection = props => {
       </div>
       <ul id='foods-of-cuisine'>
             {foodsOfCuisine.map(food=><li key={food.name}><strong>{food.name}</strong><p>{food.description}</p></li>)}
-
       </ul>
     </>
   )

@@ -4,8 +4,6 @@ const getCuisines = (req, res) => {
   Cuisine.find({}).exec()
   .then(results => {
     res.status(200).json(results);
-    // console.log(results);
-    console.log('all cuisines sent!');
   })
   .catch(error => console.log(error));
 }
@@ -13,8 +11,6 @@ const getCuisines = (req, res) => {
 const getCuisine = (req, res) => {
   Cuisine.findOne({name: req.params.cuisineID}).exec()
   .then(result => {
-    //TODO: add if empty collection found - is it possible?
-    console.log(`ahaha: # ${result}`);
     res.status(200).json(result);
   })
   .catch(error => res.status(400).json(error));
@@ -28,7 +24,6 @@ const postCuisine = (req,res) => {
   else {
     Cuisine.find({'name': req.body.name}).exec()
     .then(result => {
-      console.log(`result found: ${result}`);
       if (result.length > 0) {
         res.status(400).json(`${req.body.name} cuisine already exists.`)
       }
@@ -44,11 +39,7 @@ const postCuisine = (req,res) => {
         .catch(error => console.log(error));
       }
     })
-
   }
-
-
-  
 }
 
 module.exports = 
