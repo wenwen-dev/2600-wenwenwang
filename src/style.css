@@ -30,7 +30,8 @@ h1 {
 
 nav ul {
   font-family: 'Gajraj One', cursive;
-  padding-top: 30px;
+  padding-left: 50px;
+  padding-top: 60px;
   display: flex;
   justify-content: center;
   gap: 3rem;
@@ -95,7 +96,12 @@ ul {
   padding: 0;
 }
 
-#all-cuisines,
+#all-cuisines {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 100px;
+}
 #foods-of-cuisine {
   display: grid;
   gap: 20px;
